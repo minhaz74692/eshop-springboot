@@ -29,27 +29,30 @@ public class ProductService implements IProductService{
     @Override
     public Void deleteProductById(Long id) {
 //        productRepository.deleteProduct(id).orElseThrow(()-> new ProductDeleteFailedException("Product delete failed"));
-        productRepository.findById(id).ifPresentOrElse(productRepository ::delete, ()-> {throw new ProductDeleteFailedException("Product delete failed");});
+         productRepository.findById(id).ifPresentOrElse(productRepository ::delete, ()-> {throw new ProductDeleteFailedException("Product delete failed");});
+        return null;
     }
 
     @Override
     public List<Product> getAllProducts() {
-        return List.of();
+        return productRepository.findAll();
     }
 
     @Override
     public List<Product> getProductsByCategory(String category) {
-        return List.of();
+        return productRepository.findByCategoryName(category);
     }
 
     @Override
     public List<Product> getProductsByBrand(String brand) {
-        return List.of();
+
+        return productRepository.findByBrand(brand);
     }
 
     @Override
     public List<Product> getProductsByCategoryAndBrand(String category, String brand) {
-        return List.of();
+
+        return productRepository.findByCategoryAndBrand(category, brand);
     }
 
     @Override
